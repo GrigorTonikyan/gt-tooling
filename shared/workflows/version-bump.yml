@@ -1,0 +1,52 @@
+name: Version Bump
+
+on:
+  workflow_dispatch:
+    inputs:
+      version_type:
+        description: 'Version bump type'
+        required: true
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+      submodule:
+        description: 'Specific submodule (optional)'
+        required: false
+        type: string
+
+jobs:
+  bump-version:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+          token: ${{ secrets.WORKFLOW_TOKEN }}
+
+      - name: Set up PowerShell
+        uses: actions/setup-powershell@v1
+        with:
+          powershell-version: '7.0'
+
+      - name: Bump Version
+        shell: pwsh
+        run: |
+          $params = @{
+            VersionType = "${{ github.event.inputs.version_type }}"
+          }
+          if ("${{ github.event.inputs.submodule }}") {
+            $params.Add("Submodule", "${{ github.event.inputs.submodule }}")
+          }
+          ./shared/scripts/bump-version.ps1 @params
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.WORKFLOW_TOKEN }}
+          commit-message: "chore: bump version ${{ github.event.inputs.version_type }}"
+          title: "Version Bump: ${{ github.event.inputs.version_type }}"
+          body: "Automated version bump via GitHub Actions"
+          branch: "version-bump/${{ github.event.inputs.version_type }}"
+          base: ${{ github.event.repository.default_branch }}

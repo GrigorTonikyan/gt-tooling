@@ -1,0 +1,53 @@
+name: Security Scan
+
+on:
+  push:
+    branches: [ master, dev ]
+  pull_request:
+    branches: [ master, dev ]
+  schedule:
+    - cron: '0 0 * * 0'  # Run weekly
+
+jobs:
+  security-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+
+      - name: Run PowerShell Security Scan
+        uses: microsoft/psscriptanalyzer-action@v1
+        with:
+          path: ./log-master
+          recurse: true
+          output: security-results.sarif
+          settings: PSGallery
+
+      - name: Run Node.js Security Scan
+        uses: snyk/actions/node@master
+        with:
+          args: --all-projects
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+      - name: Run SAST Scan
+        uses: github/codeql-action/analyze@v2
+        with:
+          languages: javascript, powershell
+
+      - name: Check Dependencies
+        uses: dependency-check/Dependency-Check_Action@main
+        with:
+          project: 'GT-Tooling'
+          path: '.'
+          format: 'HTML'
+          args: >
+            --suppression ./.dependency-check-suppression.xml
+            --enableExperimental
+            --failOnCVSS 7
+
+      - name: Upload Security Results
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: security-results.sarif
