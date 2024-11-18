@@ -53,3 +53,6 @@ go.work
 # Operating System
 .DS_Store
 Thumbs.db
+
+# Custom staff
+actions-logs
