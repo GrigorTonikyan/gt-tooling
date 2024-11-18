@@ -1,0 +1,3 @@
+[submodule "log-master"]
+	path = log-master
+	url = https://github.com/GrigorTonikyan/log-master.git
