@@ -1,3 +1,4 @@
+# Content from shared/workflows/version-bump.yml
 name: Version Bump
 
 on:

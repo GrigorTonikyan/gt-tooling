@@ -1,3 +1,4 @@
+# Content from shared/workflows/security-scan.yml
 name: Security Scan
 
 on:
