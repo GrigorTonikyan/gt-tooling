@@ -1,4 +1,4 @@
-# Advanced PowerShell Logging System
+# LogMaster - Advanced PowerShell Logging System
 
 A comprehensive logging system for PowerShell scripts with advanced features including log rotation, compression, metrics tracking, and GUI-based analysis.
 
@@ -14,7 +14,7 @@ A comprehensive logging system for PowerShell scripts with advanced features inc
 
 ## Components
 
-### Core Module (logger.ps1)
+### Core Module (LogMaster.ps1)
 The main logging engine providing core functionality:
 ```powershell
 # Initialize a new logging session
@@ -55,7 +55,7 @@ Start-LogArchiveManager -RetentionDays 30 -CompressionAgeDays 7
 1. Clone the repository
 2. Import the modules:
 ```powershell
-Import-Module .\logger.ps1
+Import-Module .\LogMaster.ps1
 Import-Module .\LogArchiver.ps1
 ```
 

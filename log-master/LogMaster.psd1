@@ -4,11 +4,11 @@
     Author = 'Codeium'
     CompanyName = 'Codeium'
     Copyright = '(c) 2024 Codeium. All rights reserved.'
-    Description = 'Advanced PowerShell Logging System'
+    Description = 'LogMaster - Advanced PowerShell Logging System'
     PowerShellVersion = '7.0'
     
     # Script module or binary module file associated with this manifest
-    RootModule = 'AdvancedLogging.psm1'
+    RootModule = 'LogMaster.psm1'
     
     # Functions to export from this module
     FunctionsToExport = @(
