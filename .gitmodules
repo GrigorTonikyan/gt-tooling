@@ -1,3 +1,7 @@
 [submodule "log-master"]
 	path = log-master
 	url = https://github.com/GrigorTonikyan/log-master.git
+[submodule "web-fs-manager"]
+	path = web-fs-manager
+	url = https://github.com/GrigorTonikyan/web-fs-manager.git
+	branch = dev
