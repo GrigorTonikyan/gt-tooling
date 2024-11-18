@@ -1,0 +1,45 @@
+[2024-11-15 01:51:46] [INFO] Starting installation process
+[2024-11-15 01:51:46] [INFO] Installation path: X:\scripts\tools\logging
+[2024-11-15 01:51:46] [INFO] Log file: X:\scripts\tools\logging\logs\install_2024-11-15_01-51-46\install.log
+[2024-11-15 01:51:46] [DEBUG] Checking PowerShell version
+[2024-11-15 01:51:46] [DEBUG] PowerShell Core verified: 7.4.6
+[2024-11-15 01:51:46] [DEBUG] Checking module: Pester (>= 5.0.0)
+[2024-11-15 01:51:46] [DEBUG] Importing module: Pester
+[2024-11-15 01:51:47] [DEBUG] Checking module: PSScriptAnalyzer (>= 1.20.0)
+[2024-11-15 01:51:47] [DEBUG] Importing module: PSScriptAnalyzer
+[2024-11-15 01:51:47] [DEBUG] Skip file copy: True
+[2024-11-15 01:51:47] [DEBUG] Checking directory: logs
+[2024-11-15 01:51:47] [DEBUG] Checking directory: Tests
+[2024-11-15 01:51:47] [DEBUG] Checking directory: docs
+[2024-11-15 01:51:47] [INFO] Running PSScriptAnalyzer...
+[2024-11-15 01:51:47] [DEBUG] Analyzing file: Execute-WithLogging.ps1
+[2024-11-15 01:51:47] [DEBUG] Analyzing file: Install-LoggingSystem.ps1
+[2024-11-15 01:51:49] [DEBUG] Analyzing file: LogAnalyzer.ps1
+[2024-11-15 01:51:50] [DEBUG] Analyzing file: LogArchiver.ps1
+[2024-11-15 01:51:51] [DEBUG] Analyzing file: logger.ps1
+[2024-11-15 01:51:52] [INFO] PSScriptAnalyzer: All files pass analysis.
+[2024-11-15 01:51:52] [INFO] Running Pester tests...
+[2024-11-15 01:51:52] [DEBUG] Configuring Pester
+[2024-11-15 01:51:52] [ERROR] Error running tests: Exception setting "SkipRemainingOnFailure": "Cannot convert value "False" to type "Pester.StringOption". Error: "Invalid cast from 'System.Boolean' to 'Pester.StringOption'.""
+[2024-11-15 01:51:52] [INFO] Registering module...
+[2024-11-15 01:51:52] [DEBUG] Module path: C:\Users\grigor.tonikyan\OneDrive - DIGITAIN LLC\Documents\PowerShell\Modules
+[2024-11-15 01:51:52] [DEBUG] Copying module files to: C:\Users\grigor.tonikyan\OneDrive - DIGITAIN LLC\Documents\PowerShell\Modules\AdvancedLogging
+[2024-11-15 01:51:52] [INFO] Module installed to: C:\Users\grigor.tonikyan\OneDrive - DIGITAIN LLC\Documents\PowerShell\Modules\AdvancedLogging
+[2024-11-15 01:51:52] [INFO] Validating installation...
+[2024-11-15 01:51:53] [INFO] Installation validated successfully!
+[2024-11-15 01:51:53] [INFO] 
+Installation Summary
+-------------------
+Location: X:\scripts\tools\logging
+PSScriptAnalyzer: Passed
+Tests: Failed
+Module Registration: Completed
+
+Next Steps:
+1. Review any warnings or errors above
+2. Import the module: Import-Module AdvancedLogging
+3. Initialize logging: Initialize-LogSession
+4. Start using the logging functions!
+
+Documentation can be found in: X:\scripts\tools\logging\docs
+[2024-11-15 01:51:53] [INFO] Installation process completed

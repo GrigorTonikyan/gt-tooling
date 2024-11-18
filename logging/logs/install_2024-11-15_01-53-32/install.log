@@ -1,0 +1,23 @@
+[2024-11-15 01:53:32] [INFO] Starting installation process
+[2024-11-15 01:53:32] [INFO] Installation path: X:\scripts\tools\logging
+[2024-11-15 01:53:32] [INFO] Log file: X:\scripts\tools\logging\logs\install_2024-11-15_01-53-32\install.log
+[2024-11-15 01:53:32] [DEBUG] Checking PowerShell version
+[2024-11-15 01:53:32] [DEBUG] PowerShell Core verified: 7.4.6
+[2024-11-15 01:53:32] [DEBUG] Checking module: Pester (>= 5.0.0)
+[2024-11-15 01:53:32] [DEBUG] Importing module: Pester
+[2024-11-15 01:53:33] [DEBUG] Checking module: PSScriptAnalyzer (>= 1.20.0)
+[2024-11-15 01:53:33] [DEBUG] Importing module: PSScriptAnalyzer
+[2024-11-15 01:53:33] [DEBUG] Skip file copy: True
+[2024-11-15 01:53:33] [DEBUG] Checking directory: logs
+[2024-11-15 01:53:33] [DEBUG] Checking directory: Tests
+[2024-11-15 01:53:33] [DEBUG] Checking directory: docs
+[2024-11-15 01:53:33] [INFO] Running PSScriptAnalyzer...
+[2024-11-15 01:53:33] [DEBUG] Analyzing file: Execute-WithLogging.ps1
+[2024-11-15 01:53:33] [DEBUG] Analyzing file: Install-LoggingSystem.ps1
+[2024-11-15 01:53:35] [DEBUG] Analyzing file: LogAnalyzer.ps1
+[2024-11-15 01:53:36] [DEBUG] Analyzing file: LogArchiver.ps1
+[2024-11-15 01:53:37] [DEBUG] Analyzing file: logger.ps1
+[2024-11-15 01:53:38] [INFO] PSScriptAnalyzer: All files pass analysis.
+[2024-11-15 01:53:38] [INFO] Running Pester tests...
+[2024-11-15 01:53:38] [DEBUG] Configuring Pester
+[2024-11-15 01:53:38] [DEBUG] Starting Pester tests
