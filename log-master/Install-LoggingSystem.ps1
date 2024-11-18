@@ -60,11 +60,11 @@ Write-InstallLog "PowerShell Core verified: $($PSVersionTable.PSVersion)" "DEBUG
 # Import required modules
 $requiredModules = @(
     @{
-        Name = 'Pester'
+        Name           = 'Pester'
         MinimumVersion = '5.0.0'
     },
     @{
-        Name = 'PSScriptAnalyzer'
+        Name           = 'PSScriptAnalyzer'
         MinimumVersion = '1.20.0'
     }
 )
@@ -142,7 +142,7 @@ $analysis = Get-ChildItem -Path $InstallPath -Filter "*.ps1" | ForEach-Object {
     $results = Invoke-ScriptAnalyzer -Path $_.FullName -Settings PSGallery
     if ($results) {
         [PSCustomObject]@{
-            File = $_.Name
+            File   = $_.Name
             Issues = $results
         }
     }
@@ -199,7 +199,8 @@ if ($RegisterModule) {
     try {
         $userModulePath = if ($IsWindows) {
             Join-Path -Path ([Environment]::GetFolderPath('MyDocuments')) -ChildPath "PowerShell\Modules"
-        } else {
+        }
+        else {
             "~/.local/share/powershell/Modules"
         }
         

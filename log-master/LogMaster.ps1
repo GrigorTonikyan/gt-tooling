@@ -4,36 +4,36 @@ using namespace System.Security.Cryptography
 
 # Configuration
 $script:LogConfig = @{
-    LogRoot = Join-Path -Path $PSScriptRoot -ChildPath "logs"
-    CurrentSession = $null
-    LogLevels = @{
-        TRACE = "TRACE"
-        DEBUG = "DEBUG"
-        INFO = "INFO"
-        WARNING = "WARNING"
-        ERROR = "ERROR"
+    LogRoot          = Join-Path -Path $PSScriptRoot -ChildPath "logs"
+    CurrentSession   = $null
+    LogLevels        = @{
+        TRACE    = "TRACE"
+        DEBUG    = "DEBUG"
+        INFO     = "INFO"
+        WARNING  = "WARNING"
+        ERROR    = "ERROR"
         CRITICAL = "CRITICAL"
-        COMMAND = "COMMAND"
-        OUTPUT = "OUTPUT"
-        METRIC = "METRIC"
+        COMMAND  = "COMMAND"
+        OUTPUT   = "OUTPUT"
+        METRIC   = "METRIC"
     }
-    TimeFormat = "yyyy-MM-dd HH:mm:ss.fff"
-    RetentionDays = 30
-    CompressionAge = 7  # Days before compressing logs
-    MaxLogSize = 10MB  # Size before rotating
-    EnableMetrics = $true
+    TimeFormat       = "yyyy-MM-dd HH:mm:ss.fff"
+    RetentionDays    = 30
+    CompressionAge   = 7  # Days before compressing logs
+    MaxLogSize       = 10MB  # Size before rotating
+    EnableMetrics    = $true
     EnableStackTrace = $true
-    LogLevel = "INFO"  # Minimum level to log
+    LogLevel         = "INFO"  # Minimum level to log
 }
 
 # Performance metrics
 $script:Metrics = @{
     CommandCount = 0
-    ErrorCount = 0
+    ErrorCount   = 0
     WarningCount = 0
-    StartTime = $null
-    LogSize = 0
-    LastFlush = $null
+    StartTime    = $null
+    LogSize      = 0
+    LastFlush    = $null
 }
 
 function Initialize-LogSession {
@@ -92,12 +92,12 @@ function Initialize-LogSession {
         
         # Create session object
         $session = @{
-            Id = $sessionId
-            Directory = $sessionDir
-            CommandDir = $commandDir
-            MainLog = $mainLog
-            MetricsFile = if ($EnableMetrics) { $metricsFile } else { $null }
-            StartTime = Get-Date
+            Id           = $sessionId
+            Directory    = $sessionDir
+            CommandDir   = $commandDir
+            MainLog      = $mainLog
+            MetricsFile  = if ($EnableMetrics) { $metricsFile } else { $null }
+            StartTime    = Get-Date
             LastRotation = Get-Date
         }
         
@@ -293,12 +293,12 @@ function Update-LogMetric {
     }
     
     $metrics = @{
-        Timestamp = Get-Date
-        CommandCount = $script:Metrics.CommandCount
-        ErrorCount = $script:Metrics.ErrorCount
-        WarningCount = $script:Metrics.WarningCount
+        Timestamp       = Get-Date
+        CommandCount    = $script:Metrics.CommandCount
+        ErrorCount      = $script:Metrics.ErrorCount
+        WarningCount    = $script:Metrics.WarningCount
         SessionDuration = (Get-Date) - $script:Metrics.StartTime
-        LogSize = $script:Metrics.LogSize
+        LogSize         = $script:Metrics.LogSize
     }
     
     $metricsPath = Join-Path -Path $script:LogConfig.CurrentSession.Directory -ChildPath "metrics/metrics.json"
@@ -318,8 +318,8 @@ function Remove-LogSession {
     
     $cutoffDate = (Get-Date).AddDays(-$script:LogConfig.RetentionDays)
     Get-ChildItem -Path $script:LogConfig.LogRoot -Directory |
-        Where-Object { $_.CreationTime -lt $cutoffDate } |
-        Remove-Item -Recurse -Force
+    Where-Object { $_.CreationTime -lt $cutoffDate } |
+    Remove-Item -Recurse -Force
 }
 
 Export-ModuleMember -Function @(

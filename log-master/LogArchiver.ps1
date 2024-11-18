@@ -66,10 +66,10 @@ function Compress-LogSession {
             $manifest = @{
                 ArchiveDate = Get-Date
                 SessionPath = $SessionPath
-                Files = Get-ChildItem -Path $tempDir -Recurse | ForEach-Object {
+                Files       = Get-ChildItem -Path $tempDir -Recurse | ForEach-Object {
                     @{
-                        Path = $_.FullName.Substring($tempDir.Length + 1)
-                        Size = if ($_.PSIsContainer) { 0 } else { $_.Length }
+                        Path          = $_.FullName.Substring($tempDir.Length + 1)
+                        Size          = if ($_.PSIsContainer) { 0 } else { $_.Length }
                         LastWriteTime = $_.LastWriteTime
                     }
                 }
@@ -209,7 +209,7 @@ function Start-LogArchiveManager {
         # Get all log sessions
         $logsPath = $script:LogConfig.LogRoot
         $sessions = Get-ChildItem -Path $logsPath -Directory |
-            Where-Object { -not $_.Name.EndsWith(".zip") }
+        Where-Object { -not $_.Name.EndsWith(".zip") }
         
         foreach ($session in $sessions) {
             $age = (Get-Date) - $session.CreationTime

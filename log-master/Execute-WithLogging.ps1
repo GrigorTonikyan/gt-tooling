@@ -1,15 +1,15 @@
 # Wrapper script for executing commands with logging
 param(
-    [Parameter(Mandatory=$true)]
+    [Parameter(Mandatory = $true)]
     [string]$Command,
     
-    [Parameter(Mandatory=$false)]
+    [Parameter(Mandatory = $false)]
     [string[]]$Arguments = @(),
     
-    [Parameter(Mandatory=$false)]
+    [Parameter(Mandatory = $false)]
     [string]$WorkingDirectory = (Get-Location),
     
-    [Parameter(Mandatory=$false)]
+    [Parameter(Mandatory = $false)]
     [switch]$PassThru
 )
 
@@ -34,7 +34,8 @@ try {
     try {
         if ($Arguments.Count -gt 0) {
             $output = & $Command $Arguments 2>&1
-        } else {
+        }
+        else {
             $output = & $Command 2>&1
         }
         $exitCode = $LASTEXITCODE
@@ -52,9 +53,9 @@ try {
     if ($PassThru) {
         return @{
             CommandId = $cmdId
-            Output = $output
-            Error = $error
-            ExitCode = $exitCode
+            Output    = $output
+            Error     = $error
+            ExitCode  = $exitCode
         }
     }
 }

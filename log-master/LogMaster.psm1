@@ -21,7 +21,7 @@ foreach ($component in $components) {
 
 # Module initialization
 $script:ModuleConfig = @{
-    Version = '1.0.0'
+    Version        = '1.0.0'
     DefaultLogRoot = Join-Path $PSScriptRoot "logs"
 }
 

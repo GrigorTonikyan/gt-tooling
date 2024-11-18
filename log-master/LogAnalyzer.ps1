@@ -28,10 +28,10 @@ function New-LogAnalyzerForm {
     # Initial load
     if ($controls.SessionCombo.SelectedItem) {
         Update-AnalyzerView -Session $controls.SessionCombo.SelectedItem `
-                          -Level $controls.LevelCombo.SelectedItem `
-                          -SearchText $controls.SearchBox.Text `
-                          -LogView $controls.LogView `
-                          -MetricsView $controls.MetricsView
+            -Level $controls.LevelCombo.SelectedItem `
+            -SearchText $controls.SearchBox.Text `
+            -LogView $controls.LogView `
+            -MetricsView $controls.MetricsView
     }
 
     return $form
@@ -153,42 +153,42 @@ function Register-AnalyzerEvent {
     )
     
     $Controls.RefreshButton.Add_Click({
-        Update-AnalyzerView -Session $Controls.SessionCombo.SelectedItem `
-                          -Level $Controls.LevelCombo.SelectedItem `
-                          -SearchText $Controls.SearchBox.Text `
-                          -LogView $Controls.LogView `
-                          -MetricsView $Controls.MetricsView
-    })
+            Update-AnalyzerView -Session $Controls.SessionCombo.SelectedItem `
+                -Level $Controls.LevelCombo.SelectedItem `
+                -SearchText $Controls.SearchBox.Text `
+                -LogView $Controls.LogView `
+                -MetricsView $Controls.MetricsView
+        })
 
     $Controls.ExportButton.Add_Click({
-        Export-AnalyzerLog -Session $Controls.SessionCombo.SelectedItem `
-                         -Level $Controls.LevelCombo.SelectedItem `
-                         -SearchText $Controls.SearchBox.Text
-    })
+            Export-AnalyzerLog -Session $Controls.SessionCombo.SelectedItem `
+                -Level $Controls.LevelCombo.SelectedItem `
+                -SearchText $Controls.SearchBox.Text
+        })
 
     $Controls.SessionCombo.Add_SelectedIndexChanged({
-        Update-AnalyzerView -Session $Controls.SessionCombo.SelectedItem `
-                          -Level $Controls.LevelCombo.SelectedItem `
-                          -SearchText $Controls.SearchBox.Text `
-                          -LogView $Controls.LogView `
-                          -MetricsView $Controls.MetricsView
-    })
+            Update-AnalyzerView -Session $Controls.SessionCombo.SelectedItem `
+                -Level $Controls.LevelCombo.SelectedItem `
+                -SearchText $Controls.SearchBox.Text `
+                -LogView $Controls.LogView `
+                -MetricsView $Controls.MetricsView
+        })
 
     $Controls.LevelCombo.Add_SelectedIndexChanged({
-        Update-AnalyzerView -Session $Controls.SessionCombo.SelectedItem `
-                          -Level $Controls.LevelCombo.SelectedItem `
-                          -SearchText $Controls.SearchBox.Text `
-                          -LogView $Controls.LogView `
-                          -MetricsView $Controls.MetricsView
-    })
+            Update-AnalyzerView -Session $Controls.SessionCombo.SelectedItem `
+                -Level $Controls.LevelCombo.SelectedItem `
+                -SearchText $Controls.SearchBox.Text `
+                -LogView $Controls.LogView `
+                -MetricsView $Controls.MetricsView
+        })
 
     $Controls.SearchBox.Add_TextChanged({
-        Update-AnalyzerView -Session $Controls.SessionCombo.SelectedItem `
-                          -Level $Controls.LevelCombo.SelectedItem `
-                          -SearchText $Controls.SearchBox.Text `
-                          -LogView $Controls.LogView `
-                          -MetricsView $Controls.MetricsView
-    })
+            Update-AnalyzerView -Session $Controls.SessionCombo.SelectedItem `
+                -Level $Controls.LevelCombo.SelectedItem `
+                -SearchText $Controls.SearchBox.Text `
+                -LogView $Controls.LogView `
+                -MetricsView $Controls.MetricsView
+        })
 }
 
 function Update-AnalyzerView {
@@ -289,8 +289,8 @@ function Export-AnalyzerLog {
                 if (($Level -eq "ALL" -or $logLevel -eq $Level) -and
                     (-not $SearchText -or $message -like "*$SearchText*")) {
                     [PSCustomObject]@{
-                        Time = $time
-                        Level = $logLevel
+                        Time    = $time
+                        Level   = $logLevel
                         Message = $message
                     }
                 }
