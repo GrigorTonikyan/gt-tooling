@@ -26,9 +26,9 @@ jobs:
           submodules: true
 
       - name: Set up PowerShell Core
-        uses: actions/setup-powershell@v1
+        uses: powershell/setup-powershell@v2
         with:
-          powershell-version: '7.0'
+          powershell-version: '7.3'
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -36,12 +36,15 @@ jobs:
           node-version: '18'
 
       - name: Run PowerShell Security Scan
-        uses: microsoft/psscriptanalyzer-action@v1
-        with:
-          path: ./log-master
-          recurse: true
-          output: ps-security-results.sarif
-          settings: PSGallery
+        shell: pwsh
+        run: |
+          Install-Module -Name PSScriptAnalyzer -Force
+          $results = Invoke-ScriptAnalyzer -Path ./log-master -Recurse
+          $results | ConvertTo-Json | Out-File ps-security-results.json
+          if ($results.Severity -contains 'Error' -or $results.Severity -contains 'Warning') {
+            Write-Error "PSScriptAnalyzer found issues. Check ps-security-results.json for details."
+            exit 1
+          }
 
       - name: Run Node.js Security Scan
         uses: snyk/actions/node@master
@@ -70,7 +73,6 @@ jobs:
         uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: |
-            ps-security-results.sarif
             ${{ runner.temp }}/dependency-check-report.sarif
 
       - name: Archive Security Reports
@@ -79,6 +81,6 @@ jobs:
         with:
           name: security-reports-${{ matrix.os }}
           path: |
-            ps-security-results.sarif
             ${{ runner.temp }}/dependency-check-report.sarif
             ${{ runner.temp }}/dependency-check.log
+            ps-security-results.json
