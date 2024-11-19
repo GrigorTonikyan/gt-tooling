@@ -2,9 +2,13 @@ name: Download Workflow Logs
 
 on:
   workflow_run:
-    workflows: ['*']  # Triggers on completion of any workflow
+    workflows: ["*"] # Triggers on completion of any workflow
     types:
       - completed
+
+permissions:
+  contents: write
+  actions: read
 
 jobs:
   download-logs:
@@ -13,7 +17,8 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 1
-          
+          token: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Download workflow logs
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -25,22 +30,31 @@ jobs:
             sudo apt update
             sudo apt install gh
           fi
-          
+
+          # Authenticate GitHub CLI
+          echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token
+
           # Create logs directory if it doesn't exist
           mkdir -p actions-logs/logs_${{ github.event.workflow_run.id }}
-          
+
           # Download logs using GitHub CLI
           gh run download ${{ github.event.workflow_run.id }} -D actions-logs/logs_${{ github.event.workflow_run.id }}
-          
+
           # If there are any failures, also download the logs specifically
           if [ "${{ github.event.workflow_run.conclusion }}" != "success" ]; then
             gh run view ${{ github.event.workflow_run.id }} --log > actions-logs/logs_${{ github.event.workflow_run.id }}/workflow_log.txt
           fi
-          
+
       - name: Commit and push logs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git config --global user.name 'GitHub Actions'
-          git config --global user.email 'actions@github.com'
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+
+          # Configure Git to use GITHUB_TOKEN
+          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
+
           git add actions-logs/
           git commit -m "chore: add workflow logs for run ${{ github.event.workflow_run.id }}" || echo "No changes to commit"
           git push
