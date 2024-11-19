@@ -1,0 +1,25 @@
+﻿2024-11-18T07:16:36.1184375Z Current runner version: '2.321.0'
+2024-11-18T07:16:36.1206421Z ##[group]Operating System
+2024-11-18T07:16:36.1207140Z Microsoft Windows Server 2022
+2024-11-18T07:16:36.1207703Z 10.0.20348
+2024-11-18T07:16:36.1208181Z Datacenter
+2024-11-18T07:16:36.1208620Z ##[endgroup]
+2024-11-18T07:16:36.1209078Z ##[group]Runner Image
+2024-11-18T07:16:36.1209545Z Image: windows-2022
+2024-11-18T07:16:36.1210008Z Version: 20241113.3.0
+2024-11-18T07:16:36.1210970Z Included Software: https://github.com/actions/runner-images/blob/win22/20241113.3/images/windows/Windows2022-Readme.md
+2024-11-18T07:16:36.1212275Z Image Release: https://github.com/actions/runner-images/releases/tag/win22%2F20241113.3
+2024-11-18T07:16:36.1213068Z ##[endgroup]
+2024-11-18T07:16:36.1213526Z ##[group]Runner Image Provisioner
+2024-11-18T07:16:36.1214054Z 2.0.384.1
+2024-11-18T07:16:36.1214442Z ##[endgroup]
+2024-11-18T07:16:36.1215482Z ##[group]GITHUB_TOKEN Permissions
+2024-11-18T07:16:36.1217428Z Contents: read
+2024-11-18T07:16:36.1218055Z Metadata: read
+2024-11-18T07:16:36.1218518Z Packages: read
+2024-11-18T07:16:36.1218978Z ##[endgroup]
+2024-11-18T07:16:36.1221893Z Secret source: Actions
+2024-11-18T07:16:36.1222716Z Prepare workflow directory
+2024-11-18T07:16:36.1521806Z Prepare all required actions
+2024-11-18T07:16:36.1558355Z Getting action download info
+2024-11-18T07:16:36.5259313Z ##[error]Unable to resolve action actions/setup-powershell, repository not found. Unable to resolve action `microsoft/psscriptanalyzer-action@v1`, unable to find version `v1`

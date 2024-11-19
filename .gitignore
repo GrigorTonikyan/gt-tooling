@@ -7,7 +7,6 @@
 
 # Python
 __pycache__/
-*.py[cod]
 *$py.class
 *.so
 .Python
@@ -53,6 +52,3 @@ go.work
 # Operating System
 .DS_Store
 Thumbs.db
-
-# Custom staff
-actions-logs

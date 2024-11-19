@@ -1,0 +1,25 @@
+﻿2024-11-18T07:16:34.3021509Z Current runner version: '2.321.0'
+2024-11-18T07:16:34.3046301Z ##[group]Operating System
+2024-11-18T07:16:34.3047190Z Ubuntu
+2024-11-18T07:16:34.3047691Z 22.04.5
+2024-11-18T07:16:34.3048202Z LTS
+2024-11-18T07:16:34.3048772Z ##[endgroup]
+2024-11-18T07:16:34.3049280Z ##[group]Runner Image
+2024-11-18T07:16:34.3049856Z Image: ubuntu-22.04
+2024-11-18T07:16:34.3050501Z Version: 20241112.1.0
+2024-11-18T07:16:34.3051809Z Included Software: https://github.com/actions/runner-images/blob/ubuntu22/20241112.1/images/ubuntu/Ubuntu2204-Readme.md
+2024-11-18T07:16:34.3053152Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu22%2F20241112.1
+2024-11-18T07:16:34.3054135Z ##[endgroup]
+2024-11-18T07:16:34.3054680Z ##[group]Runner Image Provisioner
+2024-11-18T07:16:34.3055272Z 2.0.384.1
+2024-11-18T07:16:34.3055809Z ##[endgroup]
+2024-11-18T07:16:34.3056897Z ##[group]GITHUB_TOKEN Permissions
+2024-11-18T07:16:34.3059429Z Contents: read
+2024-11-18T07:16:34.3059981Z Metadata: read
+2024-11-18T07:16:34.3060791Z Packages: read
+2024-11-18T07:16:34.3061397Z ##[endgroup]
+2024-11-18T07:16:34.3064581Z Secret source: Actions
+2024-11-18T07:16:34.3065766Z Prepare workflow directory
+2024-11-18T07:16:34.3377357Z Prepare all required actions
+2024-11-18T07:16:34.3414660Z Getting action download info
+2024-11-18T07:16:34.7081934Z ##[error]Unable to resolve action actions/setup-powershell, repository not found. Unable to resolve action `microsoft/psscriptanalyzer-action@v1`, unable to find version `v1`
