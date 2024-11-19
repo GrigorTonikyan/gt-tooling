@@ -26,7 +26,7 @@ jobs:
           submodules: true
 
       - name: Set up PowerShell Core
-        uses: powershell/setup-powershell@v2
+        uses: microsoft/PowerShell@v1
         with:
           powershell-version: '7.3'
 
