@@ -11,34 +11,33 @@ on:
 
 jobs:
   security-scan:
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest]
-        include:
-          - os: ubuntu-latest
-            shell: bash
-          - os: windows-latest
-            shell: pwsh
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
         with:
           submodules: true
-
-      - name: Set up PowerShell Core
-        uses: microsoft/powershell@v1
-        with:
-          powershell-version: '7.3'
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
 
+      - name: Install PowerShell and Dependencies
+        run: |
+          # Install PowerShell
+          sudo apt-get update
+          sudo apt-get install -y wget apt-transport-https software-properties-common
+          wget -q "https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/packages-microsoft-prod.deb"
+          sudo dpkg -i packages-microsoft-prod.deb
+          sudo apt-get update
+          sudo apt-get install -y powershell
+          
+          # Install PSScriptAnalyzer
+          pwsh -Command 'Install-Module -Name PSScriptAnalyzer -Force'
+
       - name: Run PowerShell Security Scan
         shell: pwsh
         run: |
-          Install-Module -Name PSScriptAnalyzer -Force
           $results = Invoke-ScriptAnalyzer -Path ./log-master -Recurse
           $results | ConvertTo-Json | Out-File ps-security-results.json
           if ($results.Severity -contains 'Error' -or $results.Severity -contains 'Warning') {
@@ -46,41 +45,13 @@ jobs:
             exit 1
           }
 
+      - name: Install Snyk
+        run: |
+          sudo npm install -g snyk
+          snyk auth ${{ secrets.SNYK_TOKEN }}
+
       - name: Run Node.js Security Scan
-        uses: snyk/actions/node@master
-        with:
-          args: --all-projects
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-
-      - name: Run SAST Scan
-        uses: github/codeql-action/analyze@v2
-        with:
-          languages: javascript, powershell
-
-      - name: Run OWASP Dependency Check
-        uses: dependency-check/Dependency-Check_Action@main
-        with:
-          project: 'GT-Tooling'
-          path: '.'
-          format: 'SARIF'
-          args: >
-            --enableExperimental
-            --failOnCVSS 7
-            --log "${{ runner.temp }}/dependency-check.log"
-
-      - name: Upload Security Results
-        uses: github/codeql-action/upload-sarif@v2
-        with:
-          sarif_file: |
-            ${{ runner.temp }}/dependency-check-report.sarif
-
-      - name: Archive Security Reports
-        if: always()
-        uses: actions/upload-artifact@v3
-        with:
-          name: security-reports-${{ matrix.os }}
-          path: |
-            ${{ runner.temp }}/dependency-check-report.sarif
-            ${{ runner.temp }}/dependency-check.log
-            ps-security-results.json
+        run: |
+          cd web-fs-manager
+          npm ci
+          snyk test --all-projects

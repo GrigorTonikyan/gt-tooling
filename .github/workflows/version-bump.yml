@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
     inputs:
       version_type:
-        description: 'Version bump type'
+        description: "Version bump type"
         required: true
         type: choice
         options:
@@ -13,31 +13,33 @@ on:
           - minor
           - major
       submodule:
-        description: 'Specific submodule (optional)'
+        description: "Specific submodule (optional)"
         required: false
         type: string
 
 jobs:
   bump-version:
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
         with:
           submodules: true
           token: ${{ secrets.WORKFLOW_TOKEN }}
 
-      - name: Set up PowerShell Core
-        uses: actions/setup-powershell@v1
-        with:
-          powershell-version: '7.0'
-
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: "18"
+
+      - name: Install PowerShell
+        run: |
+          # Install PowerShell
+          sudo apt-get update
+          sudo apt-get install -y wget apt-transport-https software-properties-common
+          wget -q "https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/packages-microsoft-prod.deb"
+          sudo dpkg -i packages-microsoft-prod.deb
+          sudo apt-get update
+          sudo apt-get install -y powershell
 
       - name: Bump Version
         shell: pwsh
@@ -49,27 +51,17 @@ jobs:
           if ("${{ github.event.inputs.submodule }}") {
             $params.Add("Submodule", "${{ github.event.inputs.submodule }}")
           }
-          $scriptPath = Join-Path $pwd "shared/scripts/bump-version.ps1"
-          if ($IsWindows) {
-            $scriptPath = $scriptPath.Replace('/', '\')
-          }
-          & $scriptPath @params
+          ./tools/Update-Version.ps1 @params
 
       - name: Create Pull Request
-        if: matrix.os == 'ubuntu-latest' # Only create PR once
         uses: peter-evans/create-pull-request@v5
         with:
           token: ${{ secrets.WORKFLOW_TOKEN }}
-          commit-message: "chore: bump version ${{ github.event.inputs.version_type }}"
-          title: "Version Bump: ${{ github.event.inputs.version_type }}"
+          commit-message: "chore: bump version (${{ github.event.inputs.version_type }})"
+          title: "chore: version bump ${{ github.event.inputs.version_type }}"
           body: |
-            Automated version bump via GitHub Actions
+            Automated version bump
             - Type: ${{ github.event.inputs.version_type }}
             - Submodule: ${{ github.event.inputs.submodule || 'all' }}
-            
-            Tested on:
-            - Windows
-            - Linux
-            - macOS
-          branch: "version-bump/${{ github.event.inputs.version_type }}"
-          base: ${{ github.event.repository.default_branch }}
+          branch: "chore/version-bump"
+          delete-branch: true

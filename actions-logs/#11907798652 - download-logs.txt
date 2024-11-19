@@ -1,0 +1,178 @@
+2024-11-19T06:55:30.6283202Z Current runner version: '2.321.0'
+2024-11-19T06:55:30.6307970Z ##[group]Operating System
+2024-11-19T06:55:30.6308717Z Ubuntu
+2024-11-19T06:55:30.6309258Z 22.04.5
+2024-11-19T06:55:30.6309832Z LTS
+2024-11-19T06:55:30.6310305Z ##[endgroup]
+2024-11-19T06:55:30.6310859Z ##[group]Runner Image
+2024-11-19T06:55:30.6311485Z Image: ubuntu-22.04
+2024-11-19T06:55:30.6311982Z Version: 20241112.1.0
+2024-11-19T06:55:30.6313394Z Included Software: https://github.com/actions/runner-images/blob/ubuntu22/20241112.1/images/ubuntu/Ubuntu2204-Readme.md
+2024-11-19T06:55:30.6314843Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu22%2F20241112.1
+2024-11-19T06:55:30.6315733Z ##[endgroup]
+2024-11-19T06:55:30.6316256Z ##[group]Runner Image Provisioner
+2024-11-19T06:55:30.6316882Z 2.0.384.1
+2024-11-19T06:55:30.6317328Z ##[endgroup]
+2024-11-19T06:55:30.6318375Z ##[group]GITHUB_TOKEN Permissions
+2024-11-19T06:55:30.6320181Z Contents: read
+2024-11-19T06:55:30.6320778Z Metadata: read
+2024-11-19T06:55:30.6321513Z Packages: read
+2024-11-19T06:55:30.6322139Z ##[endgroup]
+2024-11-19T06:55:30.6325015Z Secret source: Actions
+2024-11-19T06:55:30.6325724Z Prepare workflow directory
+2024-11-19T06:55:30.6630561Z Prepare all required actions
+2024-11-19T06:55:30.6667279Z Getting action download info
+2024-11-19T06:55:30.8202545Z Download action repository 'actions/checkout@v3' (SHA:f43a0e5ff2bd294095638e18286ca9a3d1956744)
+2024-11-19T06:55:30.9819272Z Complete job name: download-logs
+2024-11-19T06:55:31.0581438Z ##[group]Run actions/checkout@v3
+2024-11-19T06:55:31.0582922Z with:
+2024-11-19T06:55:31.0583436Z   fetch-depth: 1
+2024-11-19T06:55:31.0583943Z   repository: GrigorTonikyan/gt-tooling
+2024-11-19T06:55:31.0584826Z   token: ***
+2024-11-19T06:55:31.0585310Z   ssh-strict: true
+2024-11-19T06:55:31.0585801Z   persist-credentials: true
+2024-11-19T06:55:31.0586426Z   clean: true
+2024-11-19T06:55:31.0586917Z   sparse-checkout-cone-mode: true
+2024-11-19T06:55:31.0587504Z   fetch-tags: false
+2024-11-19T06:55:31.0588074Z   lfs: false
+2024-11-19T06:55:31.0588546Z   submodules: false
+2024-11-19T06:55:31.0589026Z   set-safe-directory: true
+2024-11-19T06:55:31.0589959Z ##[endgroup]
+2024-11-19T06:55:31.2135100Z Syncing repository: GrigorTonikyan/gt-tooling
+2024-11-19T06:55:31.2140481Z ##[group]Getting Git version info
+2024-11-19T06:55:31.2141921Z Working directory is '/home/runner/work/gt-tooling/gt-tooling'
+2024-11-19T06:55:31.2143953Z [command]/usr/bin/git version
+2024-11-19T06:55:31.2214555Z git version 2.47.0
+2024-11-19T06:55:31.2228163Z ##[endgroup]
+2024-11-19T06:55:31.2245118Z Temporarily overriding HOME='/home/runner/work/_temp/e1ba816e-4b11-48c2-af78-3010bf475488' before making global git config changes
+2024-11-19T06:55:31.2248191Z Adding repository directory to the temporary git global config as a safe directory
+2024-11-19T06:55:31.2250727Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/gt-tooling/gt-tooling
+2024-11-19T06:55:31.2287057Z Deleting the contents of '/home/runner/work/gt-tooling/gt-tooling'
+2024-11-19T06:55:31.2291320Z ##[group]Initializing the repository
+2024-11-19T06:55:31.2295009Z [command]/usr/bin/git init /home/runner/work/gt-tooling/gt-tooling
+2024-11-19T06:55:31.2362849Z hint: Using 'master' as the name for the initial branch. This default branch name
+2024-11-19T06:55:31.2363969Z hint: is subject to change. To configure the initial branch name to use in all
+2024-11-19T06:55:31.2365192Z hint: of your new repositories, which will suppress this warning, call:
+2024-11-19T06:55:31.2366211Z hint:
+2024-11-19T06:55:31.2367088Z hint: 	git config --global init.defaultBranch <name>
+2024-11-19T06:55:31.2368268Z hint:
+2024-11-19T06:55:31.2369388Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2024-11-19T06:55:31.2370487Z hint: 'development'. The just-created branch can be renamed via this command:
+2024-11-19T06:55:31.2371330Z hint:
+2024-11-19T06:55:31.2372031Z hint: 	git branch -m <name>
+2024-11-19T06:55:31.2373327Z Initialized empty Git repository in /home/runner/work/gt-tooling/gt-tooling/.git/
+2024-11-19T06:55:31.2376441Z [command]/usr/bin/git remote add origin https://github.com/GrigorTonikyan/gt-tooling
+2024-11-19T06:55:31.2412794Z ##[endgroup]
+2024-11-19T06:55:31.2413738Z ##[group]Disabling automatic garbage collection
+2024-11-19T06:55:31.2415052Z [command]/usr/bin/git config --local gc.auto 0
+2024-11-19T06:55:31.2443469Z ##[endgroup]
+2024-11-19T06:55:31.2444298Z ##[group]Setting up auth
+2024-11-19T06:55:31.2448572Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2024-11-19T06:55:31.2476142Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2024-11-19T06:55:31.2766722Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2024-11-19T06:55:31.2795746Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2024-11-19T06:55:31.3026886Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2024-11-19T06:55:31.3063312Z ##[endgroup]
+2024-11-19T06:55:31.3064260Z ##[group]Fetching the repository
+2024-11-19T06:55:31.3071206Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --progress --no-recurse-submodules --depth=1 origin +150ac28fc8f9ec9b72fb3dca6b914370af57e6f6:refs/remotes/origin/master
+2024-11-19T06:55:31.5282020Z remote: Enumerating objects: 27, done.        
+2024-11-19T06:55:31.5283200Z remote: Counting objects:   3% (1/27)        
+2024-11-19T06:55:31.5283911Z remote: Counting objects:   7% (2/27)        
+2024-11-19T06:55:31.5284581Z remote: Counting objects:  11% (3/27)        
+2024-11-19T06:55:31.5285366Z remote: Counting objects:  14% (4/27)        
+2024-11-19T06:55:31.5285998Z remote: Counting objects:  18% (5/27)        
+2024-11-19T06:55:31.5286705Z remote: Counting objects:  22% (6/27)        
+2024-11-19T06:55:31.5287476Z remote: Counting objects:  25% (7/27)        
+2024-11-19T06:55:31.5288107Z remote: Counting objects:  29% (8/27)        
+2024-11-19T06:55:31.5288786Z remote: Counting objects:  33% (9/27)        
+2024-11-19T06:55:31.5289562Z remote: Counting objects:  37% (10/27)        
+2024-11-19T06:55:31.5290193Z remote: Counting objects:  40% (11/27)        
+2024-11-19T06:55:31.5290857Z remote: Counting objects:  44% (12/27)        
+2024-11-19T06:55:31.5291683Z remote: Counting objects:  48% (13/27)        
+2024-11-19T06:55:31.5292308Z remote: Counting objects:  51% (14/27)        
+2024-11-19T06:55:31.5292968Z remote: Counting objects:  55% (15/27)        
+2024-11-19T06:55:31.5293700Z remote: Counting objects:  59% (16/27)        
+2024-11-19T06:55:31.5294323Z remote: Counting objects:  62% (17/27)        
+2024-11-19T06:55:31.5294992Z remote: Counting objects:  66% (18/27)        
+2024-11-19T06:55:31.5295733Z remote: Counting objects:  70% (19/27)        
+2024-11-19T06:55:31.5296376Z remote: Counting objects:  74% (20/27)        
+2024-11-19T06:55:31.5297062Z remote: Counting objects:  77% (21/27)        
+2024-11-19T06:55:31.5297805Z remote: Counting objects:  81% (22/27)        
+2024-11-19T06:55:31.5298477Z remote: Counting objects:  85% (23/27)        
+2024-11-19T06:55:31.5299083Z remote: Counting objects:  88% (24/27)        
+2024-11-19T06:55:31.5299841Z remote: Counting objects:  92% (25/27)        
+2024-11-19T06:55:31.5300513Z remote: Counting objects:  96% (26/27)        
+2024-11-19T06:55:31.5301118Z remote: Counting objects: 100% (27/27)        
+2024-11-19T06:55:31.5301892Z remote: Counting objects: 100% (27/27), done.        
+2024-11-19T06:55:31.5302626Z remote: Compressing objects:   5% (1/20)        
+2024-11-19T06:55:31.5303264Z remote: Compressing objects:  10% (2/20)        
+2024-11-19T06:55:31.5304028Z remote: Compressing objects:  15% (3/20)        
+2024-11-19T06:55:31.5304773Z remote: Compressing objects:  20% (4/20)        
+2024-11-19T06:55:31.5305726Z remote: Compressing objects:  25% (5/20)        
+2024-11-19T06:55:31.5334832Z remote: Compressing objects:  30% (6/20)        
+2024-11-19T06:55:31.5335911Z remote: Compressing objects:  35% (7/20)        
+2024-11-19T06:55:31.5336909Z remote: Compressing objects:  40% (8/20)        
+2024-11-19T06:55:31.5337801Z remote: Compressing objects:  45% (9/20)        
+2024-11-19T06:55:31.5338677Z remote: Compressing objects:  50% (10/20)        
+2024-11-19T06:55:31.5339501Z remote: Compressing objects:  55% (11/20)        
+2024-11-19T06:55:31.5340191Z remote: Compressing objects:  60% (12/20)        
+2024-11-19T06:55:31.5340874Z remote: Compressing objects:  65% (13/20)        
+2024-11-19T06:55:31.5341613Z remote: Compressing objects:  70% (14/20)        
+2024-11-19T06:55:31.5342300Z remote: Compressing objects:  75% (15/20)        
+2024-11-19T06:55:31.5343000Z remote: Compressing objects:  80% (16/20)        
+2024-11-19T06:55:31.5343726Z remote: Compressing objects:  85% (17/20)        
+2024-11-19T06:55:31.5344418Z remote: Compressing objects:  90% (18/20)        
+2024-11-19T06:55:31.5345092Z remote: Compressing objects:  95% (19/20)        
+2024-11-19T06:55:31.5345849Z remote: Compressing objects: 100% (20/20)        
+2024-11-19T06:55:31.5346570Z remote: Compressing objects: 100% (20/20), done.        
+2024-11-19T06:55:31.5468989Z remote: Total 27 (delta 3), reused 22 (delta 3), pack-reused 0 (from 0)        
+2024-11-19T06:55:31.5540650Z From https://github.com/GrigorTonikyan/gt-tooling
+2024-11-19T06:55:31.5541827Z  * [new ref]         150ac28fc8f9ec9b72fb3dca6b914370af57e6f6 -> origin/master
+2024-11-19T06:55:31.5567477Z ##[endgroup]
+2024-11-19T06:55:31.5568323Z ##[group]Determining the checkout info
+2024-11-19T06:55:31.5569775Z ##[endgroup]
+2024-11-19T06:55:31.5570612Z ##[group]Checking out the ref
+2024-11-19T06:55:31.5573339Z [command]/usr/bin/git checkout --progress --force -B master refs/remotes/origin/master
+2024-11-19T06:55:31.5688486Z Reset branch 'master'
+2024-11-19T06:55:31.5690008Z branch 'master' set up to track 'origin/master'.
+2024-11-19T06:55:31.5694097Z ##[endgroup]
+2024-11-19T06:55:31.5696333Z [command]/usr/bin/git log -1 --format='%H'
+2024-11-19T06:55:31.5715604Z '150ac28fc8f9ec9b72fb3dca6b914370af57e6f6'
+2024-11-19T06:55:31.5944982Z ##[group]Run # Install GitHub CLI if not present
+2024-11-19T06:55:31.5946346Z # Install GitHub CLI if not present
+2024-11-19T06:55:31.5947584Z if ! command -v gh &> /dev/null; then
+2024-11-19T06:55:31.5949769Z   curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+2024-11-19T06:55:31.5953633Z   echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+2024-11-19T06:55:31.5956311Z   sudo apt update
+2024-11-19T06:55:31.5957319Z   sudo apt install gh
+2024-11-19T06:55:31.5958298Z fi
+2024-11-19T06:55:31.5959180Z 
+2024-11-19T06:55:31.5960132Z # Create logs directory if it doesn't exist
+2024-11-19T06:55:31.5961420Z mkdir -p actions-logs/logs_11907795831
+2024-11-19T06:55:31.5962599Z 
+2024-11-19T06:55:31.5963455Z # Download logs using GitHub CLI
+2024-11-19T06:55:31.5964734Z gh run download 11907795831 -D actions-logs/logs_11907795831
+2024-11-19T06:55:31.5966059Z 
+2024-11-19T06:55:31.5967105Z # If there are any failures, also download the logs specifically
+2024-11-19T06:55:31.5968397Z if [ "failure" != "success" ]; then
+2024-11-19T06:55:31.5969849Z   gh run view 11907795831 --log > actions-logs/logs_11907795831/workflow_log.txt
+2024-11-19T06:55:31.5971183Z fi
+2024-11-19T06:55:31.6092859Z shell: /usr/bin/bash -e {0}
+2024-11-19T06:55:31.6094468Z env:
+2024-11-19T06:55:31.6096337Z   GITHUB_TOKEN: ***
+2024-11-19T06:55:31.6097742Z ##[endgroup]
+2024-11-19T06:55:31.9191730Z no valid artifacts found to download
+2024-11-19T06:55:31.9221448Z ##[error]Process completed with exit code 1.
+2024-11-19T06:55:31.9376094Z Post job cleanup.
+2024-11-19T06:55:32.0122350Z [command]/usr/bin/git version
+2024-11-19T06:55:32.0161252Z git version 2.47.0
+2024-11-19T06:55:32.0202136Z Temporarily overriding HOME='/home/runner/work/_temp/c2052e11-140f-4b2c-9bb1-c5ea38b2ff0d' before making global git config changes
+2024-11-19T06:55:32.0205240Z Adding repository directory to the temporary git global config as a safe directory
+2024-11-19T06:55:32.0207014Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/gt-tooling/gt-tooling
+2024-11-19T06:55:32.0238518Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2024-11-19T06:55:32.0270651Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2024-11-19T06:55:32.0506087Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2024-11-19T06:55:32.0526813Z http.https://github.com/.extraheader
+2024-11-19T06:55:32.0537539Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2024-11-19T06:55:32.0567550Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2024-11-19T06:55:32.0926765Z Cleaning up orphan processes
