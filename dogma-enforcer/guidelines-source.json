@@ -1,0 +1,161 @@
+{
+  "$schema": "./schemas/guidelines-schema.json",
+  "version": "1.0.0",
+  "lastUpdated": "2024-01-17",
+  "guidelines": {
+    "patterns": {
+      "powerShellExe": "(?<!#.*)(?:powershell|PowerShell\\.exe)\\b",
+      "noTypeDeclaration": "(?<!#.*)\\$\\w+\\s*=",
+      "backslashPath": "(?<!#.*)[\"']\\S*\\\\",
+      "noErrorHandling": "(?<!#.*)\\btry\\b",
+      "noLogging": "Write-(?:Verbose|Error|Warning|Information)",
+      "noCommentHelp": "(?s)^[^<#]*?function\\s+\\w+-\\w+",
+      "improperVerb": "function\\s+(?!(?:Add|Approve|Assert|Backup|Block|Checkpoint|Clear|Close|Compare|Complete|Compress|Confirm|Connect|Convert|ConvertFrom|ConvertTo|Copy|Debug|Deny|Disable|Disconnect|Dismount|Edit|Enable|Enter|Exit|Expand|Export|Find|Format|Get|Grant|Group|Hide|Import|Initialize|Install|Invoke|Join|Limit|Lock|Measure|Merge|Mount|Move|New|Open|Optimize|Out|Ping|Pop|Protect|Publish|Push|Read|Receive|Register|Remove|Rename|Repair|Reset|Resize|Resolve|Restart|Restore|Resume|Revoke|Save|Search|Select|Send|Set|Show|Skip|Split|Start|Step|Stop|Submit|Suspend|Switch|Sync|Test|Trace|Unblock|Undo|Uninstall|Unlock|Unprotect|Unpublish|Unregister|Update|Use|Wait|Watch|Write)-))\\w+\\s*{",
+      "stringConcatenation": "(?<!#.*)\\$\\w+\\s*\\+\\s*['\"]|[\"']\\s*\\+\\s*\\$",
+      "improperParameterBlock": "(?<!#.*)\\bparam\\s*\\([^)]*\\)(?!\\s*{)",
+      "noParameterValidation": "(?<!#.*)\\[Parameter\\(\\s*Mandatory\\s*\\)\\](?!\\s*\\[\\w+\\])",
+      "globalVariables": "(?<!#.*)\\$global:",
+      "positionalParameters": "(?<!#.*)\\[Parameter\\([^)]*Position\\s*=\\s*\\d+[^)]*\\)\\]",
+      "noProcessBlock": "(?s)function\\s+\\w+-\\w+\\s*{[^}]*?(?:begin|end)\\s*{[^}]*}[^}]*}(?![^}]*process)",
+      "improperErrorHandling": "(?<!#.*)\\bcatch\\s*{[^}]*?(?!throw)[^}]*?}",
+      "noVerboseOutput": "(?s)function\\s+\\w+-\\w+\\s*{(?![^}]*Write-Verbose)[^}]*}",
+      "hardcodedPaths": "(?<!#.*)['\"](?:[A-Za-z]:|/)[^'\"\n]+['\"]"
+    },
+    "commandExecution": {
+      "platforms": {
+        "windows": {
+          "preferred": {
+            "shell": "pwsh",
+            "flags": ["-NoProfile"]
+          },
+          "allowed": ["powershell", "cmd", "bash"],
+          "prohibited": ["PowerShell.exe", "command.com"]
+        },
+        "linux": {
+          "preferred": {
+            "shell": "bash",
+            "flags": []
+          },
+          "allowed": ["pwsh", "sh", "zsh"],
+          "prohibited": ["PowerShell.exe", "cmd.exe"]
+        },
+        "macos": {
+          "preferred": {
+            "shell": "zsh",
+            "flags": []
+          },
+          "allowed": ["pwsh", "bash", "sh"],
+          "prohibited": ["PowerShell.exe", "cmd.exe"]
+        }
+      },
+      "examples": {
+        "correct": {
+          "windows": [
+            "pwsh -NoProfile -Command \"& { command }\"",
+            "Start-Process pwsh -ArgumentList \"-NoProfile\", \"-File\", \"script.ps1\""
+          ],
+          "linux": [
+            "bash -c \"command\"",
+            "pwsh -NoProfile -Command \"& { command }\""
+          ],
+          "macos": [
+            "zsh -c \"command\"",
+            "pwsh -NoProfile -Command \"& { command }\""
+          ]
+        },
+        "incorrect": [
+          "powershell -Command \"& { command }\"",
+          "PowerShell.exe ./script.ps1",
+          "cmd /c script.bat"
+        ]
+      }
+    },
+    "codeGeneration": {
+      "syntaxRequirements": {
+        "powershellVersion": "7.3+",
+        "typeDeclarations": "required",
+        "verbNaming": "powershellApproved",
+        "documentation": "commentBasedHelp",
+        "pathHandling": "platformAgnostic"
+      },
+      "templates": {
+        "function": {
+          "structure": [
+            "commentBasedHelp",
+            "cmdletBinding",
+            "typedParameters",
+            "beginProcessEnd",
+            "errorHandling",
+            "logging"
+          ],
+          "required": {
+            "help": ["synopsis", "description", "parameters", "example"],
+            "logging": ["start", "process", "end", "error"],
+            "errorHandling": ["try", "catch", "throw"]
+          }
+        }
+      }
+    },
+    "pathHandling": {
+      "required": {
+        "methods": ["Join-Path"],
+        "parameters": ["explicit paths", "child paths"]
+      },
+      "prohibited": {
+        "methods": ["string concatenation", "backslash paths"]
+      }
+    },
+    "errorHandling": {
+      "required": {
+        "structure": ["try", "catch", "throw"],
+        "logging": ["error details", "stack trace"],
+        "recovery": ["cleanup", "state restoration"]
+      }
+    },
+    "logging": {
+      "required": {
+        "levels": ["Verbose", "Warning", "Error"],
+        "information": ["function name", "operation details", "error messages"]
+      },
+      "patterns": {
+        "functionStart": "Write-Verbose \"Starting $($MyInvocation.MyCommand.Name)\"",
+        "operation": "Write-Verbose \"Processing item: $itemName\"",
+        "error": "Write-Error \"Failed to process item: $itemName. Error: $_\"",
+        "completion": "Write-Verbose \"Successfully completed operation\""
+      }
+    },
+    "configuration": {
+      "format": "json",
+      "required": {
+        "schema": true,
+        "documentation": true,
+        "validation": true
+      },
+      "structure": {
+        "schema": "./schemas/config-schema.json",
+        "properties": {
+          "required": ["version", "description"],
+          "optional": ["defaults", "overrides"]
+        }
+      }
+    },
+    "validation": {
+      "checklist": [
+        "pwsh usage",
+        "type declarations",
+        "approved verbs",
+        "help documentation",
+        "platform-agnostic paths",
+        "error handling",
+        "logging",
+        "verbose output",
+        "parameter validation"
+      ]
+    },
+    "compatibility": {
+      "powershell": "7.3+",
+      "platforms": ["Windows", "Linux", "macOS"],
+      "features": ["modern cmdlets", "cross-platform"]
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+    "defaultPythonVersion": "3.12",
+    "minPowerShellVersion": "7.3",
+    "requiredModules": [
+        {
+            "name": "Microsoft.PowerShell.Management",
+            "minVersion": "7.0.0"
+        }
+    ],
+    "paths": {
+        "wingetTemp": "%TEMP%\\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle",
+        "wingetDownloadUrl": "https://aka.ms/getwinget"
+    },
+    "pythonPackages": {
+        "3.12": "Python.Python.3.12",
+        "3.11": "Python.Python.3.11",
+        "3.10": "Python.Python.3.10"
+    }
+}

@@ -1,0 +1,215 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": ["version", "lastUpdated", "guidelines"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+    "lastUpdated": { "type": "string", "format": "date" },
+    "guidelines": {
+      "type": "object",
+      "required": [
+        "patterns",
+        "commandExecution",
+        "codeGeneration",
+        "pathHandling",
+        "errorHandling",
+        "logging",
+        "configuration",
+        "validation",
+        "compatibility"
+      ],
+      "properties": {
+        "patterns": {
+          "type": "object",
+          "required": [
+            "powerShellExe",
+            "noTypeDeclaration",
+            "backslashPath",
+            "noErrorHandling",
+            "noLogging",
+            "noCommentHelp",
+            "improperVerb",
+            "stringConcatenation",
+            "improperParameterBlock",
+            "noParameterValidation",
+            "globalVariables",
+            "positionalParameters",
+            "noProcessBlock",
+            "improperErrorHandling",
+            "noVerboseOutput",
+            "hardcodedPaths"
+          ],
+          "properties": {
+            "powerShellExe": { "type": "string" },
+            "noTypeDeclaration": { "type": "string" },
+            "backslashPath": { "type": "string" },
+            "noErrorHandling": { "type": "string" },
+            "noLogging": { "type": "string" },
+            "noCommentHelp": { "type": "string" },
+            "improperVerb": { "type": "string" },
+            "stringConcatenation": { "type": "string" },
+            "improperParameterBlock": { "type": "string" },
+            "noParameterValidation": { "type": "string" },
+            "globalVariables": { "type": "string" },
+            "positionalParameters": { "type": "string" },
+            "noProcessBlock": { "type": "string" },
+            "improperErrorHandling": { "type": "string" },
+            "noVerboseOutput": { "type": "string" },
+            "hardcodedPaths": { "type": "string" }
+          }
+        },
+        "commandExecution": {
+          "type": "object",
+          "required": ["platforms"],
+          "properties": {
+            "platforms": {
+              "type": "object",
+              "required": ["windows", "linux", "macos"],
+              "properties": {
+                "windows": {
+                  "type": "object",
+                  "required": ["preferred", "allowed", "prohibited"],
+                  "properties": {
+                    "preferred": {
+                      "type": "object",
+                      "required": ["shell", "flags"],
+                      "properties": {
+                        "shell": { "type": "string" },
+                        "flags": {
+                          "type": "array",
+                          "items": { "type": "string" }
+                        }
+                      }
+                    },
+                    "allowed": {
+                      "type": "array",
+                      "items": { "type": "string" }
+                    },
+                    "prohibited": {
+                      "type": "array",
+                      "items": { "type": "string" }
+                    }
+                  }
+                },
+                "linux": {
+                  "type": "object",
+                  "required": ["preferred", "allowed", "prohibited"],
+                  "properties": {
+                    "preferred": {
+                      "type": "object",
+                      "required": ["shell", "flags"],
+                      "properties": {
+                        "shell": { "type": "string" },
+                        "flags": {
+                          "type": "array",
+                          "items": { "type": "string" }
+                        }
+                      }
+                    },
+                    "allowed": {
+                      "type": "array",
+                      "items": { "type": "string" }
+                    },
+                    "prohibited": {
+                      "type": "array",
+                      "items": { "type": "string" }
+                    }
+                  }
+                },
+                "macos": {
+                  "type": "object",
+                  "required": ["preferred", "allowed", "prohibited"],
+                  "properties": {
+                    "preferred": {
+                      "type": "object",
+                      "required": ["shell", "flags"],
+                      "properties": {
+                        "shell": { "type": "string" },
+                        "flags": {
+                          "type": "array",
+                          "items": { "type": "string" }
+                        }
+                      }
+                    },
+                    "allowed": {
+                      "type": "array",
+                      "items": { "type": "string" }
+                    },
+                    "prohibited": {
+                      "type": "array",
+                      "items": { "type": "string" }
+                    }
+                  }
+                }
+              }
+            },
+            "examples": {
+              "type": "object",
+              "properties": {
+                "correct": { "type": "array", "items": { "type": "string" } },
+                "incorrect": { "type": "array", "items": { "type": "string" } }
+              }
+            }
+          }
+        },
+        "codeGeneration": {
+          "type": "object",
+          "required": ["syntaxRequirements", "templates"],
+          "properties": {
+            "syntaxRequirements": { "type": "object" },
+            "templates": { "type": "object" }
+          }
+        },
+        "pathHandling": {
+          "type": "object",
+          "required": ["required", "prohibited"],
+          "properties": {
+            "required": { "type": "object" },
+            "prohibited": { "type": "object" }
+          }
+        },
+        "errorHandling": {
+          "type": "object",
+          "required": ["required"],
+          "properties": {
+            "required": { "type": "object" }
+          }
+        },
+        "logging": {
+          "type": "object",
+          "required": ["required", "patterns"],
+          "properties": {
+            "required": { "type": "object" },
+            "patterns": { "type": "object" }
+          }
+        },
+        "configuration": {
+          "type": "object",
+          "required": ["format", "required", "structure"],
+          "properties": {
+            "format": { "type": "string" },
+            "required": { "type": "object" },
+            "structure": { "type": "object" }
+          }
+        },
+        "validation": {
+          "type": "object",
+          "required": ["checklist"],
+          "properties": {
+            "checklist": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "compatibility": {
+          "type": "object",
+          "required": ["powershell", "platforms", "features"],
+          "properties": {
+            "powershell": { "type": "string" },
+            "platforms": { "type": "array", "items": { "type": "string" } },
+            "features": { "type": "array", "items": { "type": "string" } }
+          }
+        }
+      }
+    }
+  }
+}

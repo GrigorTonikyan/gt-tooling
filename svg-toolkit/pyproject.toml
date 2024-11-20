@@ -1,0 +1,30 @@
+[tool.poetry]
+name = "svg-toolkit"
+version = "0.1.0"
+description = "A toolkit for working with SVG paths"
+authors = ["Your Name <your.email@example.com>"]
+readme = "README.md"
+packages = [{include = "svg_toolkit"}]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+typing-extensions = "^4.8.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.3"
+black = "^23.11.0"
+isort = "^5.12.0"
+mypy = "^1.7.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 88
+target-version = ['py38']
+include = '\.pyi?$'
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3

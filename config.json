@@ -1,0 +1,76 @@
+{
+    "version": {
+        "config": "1.0.0",
+        "schema": "1",
+        "minimumScriptVersion": "1.0.0",
+        "lastUpdated": "2024-01-09"
+    },
+    "ignoreDirectories": [
+        "node_modules",
+        "target",
+        ".git",
+        "venv"
+    ],
+    "projectRootFiles": [
+        "Cargo.toml",
+        "package.json",
+        "pyproject.toml",
+        "requirements.txt",
+        "Makefile"
+    ],
+    "minPowerShellVersion": "7.3",
+    "requiredModules": [
+        {
+            "name": "Microsoft.PowerShell.Management",
+            "minVersion": "7.0.0"
+        }
+    ],
+    "pythonVersions": {
+        "3.12": {
+            "packageId": "Python.Python.3.12",
+            "minVersion": "3.12.0",
+            "recommended": true
+        },
+        "3.11": {
+            "packageId": "Python.Python.3.11",
+            "minVersion": "3.11.0"
+        },
+        "3.10": {
+            "packageId": "Python.Python.3.10",
+            "minVersion": "3.10.0"
+        }
+    },
+    "paths": {
+        "wingetTemp": "%TEMP%\\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle",
+        "wingetDownloadUrl": "https://aka.ms/getwinget"
+    },
+    "registry": {
+        "pythonSoftware": "HKLM:\\SOFTWARE\\Python",
+        "pythonCore": "HKLM:\\SOFTWARE\\Python\\PythonCore"
+    },
+    "environment": {
+        "variables": [
+            "PYTHONPATH",
+            "PYTHONHOME",
+            "PYTHONIOENCODING",
+            "PYTHONUTF8"
+        ]
+    },
+    "security": {
+        "tls": {
+            "minVersion": "1.2",
+            "preferredVersion": "1.2",
+            "fallbackVersions": ["1.2"]
+        }
+    },
+    "cleanup": {
+        "directories": [
+            "%LOCALAPPDATA%\\Programs\\Python",
+            "%PROGRAMFILES%\\Python*",
+            "%PROGRAMFILES(X86)%\\Python*"
+        ],
+        "files": [
+            "%USERPROFILE%\\.python*"
+        ]
+    }
+}
