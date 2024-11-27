@@ -44,5 +44,3 @@ function walkDirectory(dir) {
 function isProjectRoot(fileName) {
   return projectRootFiles.includes(fileName);
 }
-
-// To use this tool, run the program with: `node <script_name> <path>`
